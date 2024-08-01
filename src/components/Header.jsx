@@ -4,11 +4,13 @@ import '../css/Header.css'
 import { CiShoppingBasket } from "react-icons/ci";
 import { CiLight } from "react-icons/ci";
 import { FaMoon } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
   
-  const [theme,setTheme] = useState(false)
+  const navigate = useNavigate()
 
+  const [theme,setTheme] = useState(false)
   const changeTheme = () => {
     const root = document.getElementById("root");
     
@@ -25,7 +27,7 @@ function Header() {
   return (
     <div className='header-wrapper'>
       <div className='flex-row'>
-        <img className='logo' src={logo} alt="Logo" />
+        <img className='logo' onClick={() => navigate('/')} src={logo} alt="Logo" />
         <p className='logo-text'>CELEN A.S</p>
       </div>
       <div className='flex-row'>
