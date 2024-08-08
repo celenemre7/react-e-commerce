@@ -5,7 +5,7 @@ import { setSelectedProduct } from '../redux/slices/productSlice'
 import '../css/ProductDetails.css'
 import { CiCirclePlus } from "react-icons/ci";
 import { CiCircleMinus } from "react-icons/ci";
-
+import { addToBasket } from '../redux/slices/basketSlice';
 
 function ProductDetails() {
 
@@ -21,6 +21,19 @@ function ProductDetails() {
     
     const decrement = () => {
         setCount(count - 1)
+    }
+
+    const addBasket = () => {
+      const payload = {
+        id,
+        image,
+        price,
+        title,
+        description,
+        count
+      }
+
+       dispatch(addToBasket(payload));
     }
 
     const getProdcutId = () => {
@@ -49,7 +62,7 @@ function ProductDetails() {
                 <span>{count}</span>
                 <CiCircleMinus onClick={(decrement)} className="circle-icon" />
             </div>
-            <button className="add-to-cart-button">Add to Cart</button>
+            <button onClick={addBasket} className="add-to-cart-button">Add to Cart</button>
           </div>
         </>
       )}

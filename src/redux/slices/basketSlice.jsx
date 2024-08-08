@@ -24,7 +24,7 @@ export const basketSlice = createSlice({
     initialState,
     reducers: { 
         addToBasket: (state, action) => {
-            const findProduct = products && products.find((product) => product.id === action.payload.id);
+            const findProduct = state.products && state.products.find((product) => product.id === action.payload.id);
             if (findProduct){
                 
             } else { 
