@@ -12,6 +12,7 @@ const getBasketFromStorage = () => {
 
 const initialState = {
     products: getBasketFromStorage(),
+    drawer: false
 }
 
 const writeFromBasketToStorage = (basket) => {
@@ -26,16 +27,22 @@ export const basketSlice = createSlice({
         addToBasket: (state, action) => {
             const findProduct = state.products && state.products.find((product) => product.id === action.payload.id);
             if (findProduct){
-                
+                const extractedProducts = state.products.filter((product) => product.id != action.payload.id);
+                findProduct.count += action.payload.count;
+                state.products = [...extractedProducts, findProduct]
+                writeFromBasketToStorage(state.products);
             } else { 
                 state.products = [...state.products , action.payload];
                 writeFromBasketToStorage(state.products)
             }
-        }
+        },
+        setDrawer: (state,action) => {
+            state.drawer = !state.drawer;
+        },
 
     }
 })
 
-export const {addToBasket} = basketSlice.actions
+export const {addToBasket, setDrawer} = basketSlice.actions
 
 export default basketSlice.reducer
